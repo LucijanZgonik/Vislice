@@ -1,11 +1,5 @@
 # Vislice
 
-Matematiki:
+Projekt pri predmetu UVP:
 
-Jurij Vega
-Josup PLemelj
-Ivan Vidav
-
-Predsednik države:
-
-Borut Pahor
+Naredili bomo program, ki nas vodi skozi igro vislic.
