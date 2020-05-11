@@ -49,32 +49,33 @@ class Igra:
     def pravilni_del_gesla(self):
         pr = ''
         for x in self.geslo:
-            if x in self.prav:
+            if x in self.crke:
                 pr = pr + x
             else:
                 pr = pr + '_'
         return pr
 
     def nepravilni_ugibi(self):
-        ne = ''
-        for x in self.napacne_crke():
-            ne = ne + ' ' + x
-        return ne
+        return " ".join(self.napacne_crke())
         
     def ugibaj(self,crka):
-        crka = crka.upper()
-        crke = self.crke + crka
-        self.crke = crke
-        if self.zmaga:
-            print(ZMAGA)
-        elif self.poraz:
-            print(PORAZ)
-        elif crka in self.nap or self.prav:
-            print(PONOVLJENA_CRKA)
-        elif crka in self.geslo:
-            print(PRAVILNA_CRKA)
-        elif crka not in self.geslo:
-            print(NAPACNA_CRKA)
+        crka = crka.lower()
+        if crka in self.crke:
+            return PONOVLJENA_CRKA
+
+        self.crke.append(crka)
+        
+        if crka in self.geslo:
+            if self.zmaga():
+                return ZMAGA
+            else:
+                return PRAVILNA_CRKA
+        else:
+            
+                
+
+
+        
 
 
 
