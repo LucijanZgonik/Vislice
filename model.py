@@ -6,9 +6,13 @@ ZMAGA = 'W'
 PORAZ = 'L'
 
 class Igra:
-    def __init__(self,geslo,crke):
+    def __init__(self,geslo,crke=None):
         self.geslo = geslo
-        self.crke = crke
+        if crke is None:
+            self.crke = []
+        else:
+            self.crke = [c.lower() for c in crke]
+        
 
     def napacne_crke(self):
         nap = ''
@@ -17,7 +21,7 @@ class Igra:
                 nap = nap
             else:
                 nap = nap + x
-        self.nap = nap
+        return nap
     
     def pravilne_crke(self):
         prav = ''
@@ -26,18 +30,21 @@ class Igra:
                 prav = prav + x
             else:
                 prav = prav
-        self.prav = prav
+        return prav
 
     def stevilo_napak(self):
-        self.st_nap = len(self.nap)
+        return len(self.napacne_crke())
+
 
     def zmaga(self):
-        if self.prav == self.geslo:
-            'W'
-        
+        for c in self.geslo:
+            if c not in self.crke:
+                return False
+            else:
+                return True
+    
     def poraz(self):
-        if self.st_nap > 9:
-            'L'
+        return self.stevilo_napak() > STEVILO_DOVOLJENIH_NAPAK
         
     def pravilni_del_gesla(self):
         pr = ''
@@ -46,11 +53,37 @@ class Igra:
                 pr = pr + x
             else:
                 pr = pr + '_'
+        return pr
 
     def nepravilni_ugibi(self):
         ne = ''
-        for x in self.nap:
-            ne = ne + ' '
+        for x in self.napacne_crke():
+            ne = ne + ' ' + x
+        return ne
+        
+    def ugibaj(self,crka):
+        crka = crka.upper()
+        crke = self.crke + crka
+        self.crke = crke
+        if self.zmaga:
+            print(ZMAGA)
+        elif self.poraz:
+            print(PORAZ)
+        elif crka in self.nap or self.prav:
+            print(PONOVLJENA_CRKA)
+        elif crka in self.geslo:
+            print(PRAVILNA_CRKA)
+        elif crka not in self.geslo:
+            print(NAPACNA_CRKA)
+
+
+
+
+
+bazen_besed = []
+with open ("Vislice/besede.txt") as datoteka_bazena:
+    for beseda in datoteka_bazena:
+        bazen_besed.append(beseda.strip().lower())
 
 
 
