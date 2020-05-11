@@ -71,20 +71,25 @@ class Igra:
             else:
                 return PRAVILNA_CRKA
         else:
-            
+            if self.poraz():
+                return PORAZ
+            else:
+                return NAPACNA_CRKA
                 
-
-
-        
-
-
-
-
 
 bazen_besed = []
 with open ("Vislice/besede.txt") as datoteka_bazena:
     for beseda in datoteka_bazena:
         bazen_besed.append(beseda.strip().lower())
+
+import random
+
+def nova_igra():
+    nakljucna_beseda = random.choice(bazen_besed)
+    return Igra(nakljucna_beseda)
+
+
+
 
 
 
